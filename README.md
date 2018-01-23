@@ -24,6 +24,7 @@ Achieves a PageSpeed score at least 90 for Mobile and Desktop. First of all, ins
 * Optimizing images.
 * Inline CSS.
 * Minify CSS & Javascript.
+* Minify HTML.
 * Removing inline script at the end of th body.
 ## views/js/main.js
 * Removed _scrollTop_ to above of _for loop_.
