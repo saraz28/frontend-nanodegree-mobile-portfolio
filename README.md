@@ -27,7 +27,7 @@ Achieves a PageSpeed score at least 90 for Mobile and Desktop. First of all, ins
 * Minify HTML.
 * Removing inline script at the end of th body.
 ## views/js/main.js
-* Removed _scrollTop_ to above of _for loop_.
+* Removed _scrollTop_ to above of _for loop_ so the frame render at 60fps and no jank appear.
 * Create variable scroll.
 * Change querySelectorAll and querySelector to getElementsByClassName and getElementById.
 
