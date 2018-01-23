@@ -1,4 +1,4 @@
-Frontend-nanodegree-mobile-portfolio-master
+Frontend-nanodegree-mobile-portfolio
 ============
 Optimize online portfolio for speed, optimize the critical rendering path and make this page render as quickly as possible by applying techniques.
 
