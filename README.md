@@ -1,4 +1,4 @@
-Frontend-nanodegree-mobile-portfolio-master
+Website Performance Optimization portfolio project
 ============
 Optimize online portfolio for speed, optimize the critical rendering path and make this page render as quickly as possible by applying techniques.
 
@@ -22,11 +22,12 @@ Achieves a PageSpeed score at least 90 for Mobile and Desktop. First of all, ins
 <link href='http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
 ```
 * Optimizing images.
-* Inline Css.
-* Minify Css & Javascript.
+* Inline CSS.
+* Minify CSS & Javascript.
+* Minify HTML.
 * Removing inline script at the end of th body.
 ## views/js/main.js
-* Removed _scrollTop_ to above of _for loop_.
+* Removed _scrollTop_ to above of _for loop_ so the frame render at 60fps and no jank appear.
 * Create variable scroll.
 * Change querySelectorAll and querySelector to getElementsByClassName and getElementById.
 
@@ -70,14 +71,17 @@ Original:
   ```
   After changes:
   ```bash
- var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
- i = 0;
- var dx = determineDx(randomPizzas[i], size);
- var newwidth = (randomPizzas[i].offsetWidth + dx) + 'px';
- function changePizzaSizes(size) {
-    for (var i = 0; i < randomPizzas.length; i++) {
-     randomPizzas[i].style.width = newwidth;
-    }
+function updatePositions() {
+  frame++;
+  window.performance.mark("mark_start_frame");
+
+  var items = document.getElementsByClassName('mover');
+  var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  var scroll = Math.sin(scrollTop / 1250);
+  for (var i = 0; i < items.length; i++) {
+    // document.body.scrollTop is no longer supported in Chrome.
+    var phase = scroll + (i % 5);
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 ```
 
