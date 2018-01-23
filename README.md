@@ -1,4 +1,4 @@
-Frontend-nanodegree-mobile-portfolio
+Website Performance Optimization portfolio project
 ============
 Optimize online portfolio for speed, optimize the critical rendering path and make this page render as quickly as possible by applying techniques.
 
