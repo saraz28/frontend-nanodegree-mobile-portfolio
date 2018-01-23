@@ -506,10 +506,10 @@ function updatePositions() {
 
   var items = document.getElementsByClassName('mover');
   var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  var scroll = scrollTop / 1250 + (0 % 5);
+  var scroll = scrollTop / 1250 ;
   for (var i = 0; i < items.length; i++) {
     // document.body.scrollTop is no longer supported in Chrome.
-    var phase = Math.sin(scroll);
+  var phase = Math.sin((scroll) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -531,6 +531,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var rows =  (window.screen.height / s)* cols;
+var movingPizzas = document.getElementById('movingPizzas1');
   for (var i = 0; i < rows; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -539,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.getElementById("movingPizzas1").appendChild(elem);
+    movingPizzas.appendChild(elem);
   }
   updatePositions();
 });

@@ -3,7 +3,7 @@ Website Performance Optimization portfolio project
 Optimize online portfolio for speed, optimize the critical rendering path and make this page render as quickly as possible by applying techniques.
 ## Getting Started
 first of all clone or download it as a zip file. 
-1. To run your local server on your phone 
+1. To run your local server on your phone.
 ```
 $> cd /path/to/your-project-folder
 $> python -m SimpleHTTPServer 8080
@@ -14,14 +14,15 @@ $> cd /path/to/your-project-folder
 $> ./ngrok http 8080
 ```
 Then Copy the public URL ngrok gives you as shown in the screenshot and try running it through [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/).
-![alt text](https://f.top4top.net/p_75373j901.png)
+
+![alt text](https://b.top4top.net/p_753nuk321.png)
 
 ## index.html
 Achieves a PageSpeed score at least 90 for Mobile and Desktop. First of all, installed ngrok to make local server running through PageSpeed and here the screenshots of scores and what i do to optimize it:
 # Desktop:
-![alt text](https://a.top4top.net/p_753xpj812.png)
+![alt text](https://d.top4top.net/p_7539kn0x3.png)
 # Mobile:
-![alt text](https://b.top4top.net/p_753vc1bo3.png)
+![alt text](https://c.top4top.net/p_753ix49o2.png)
 
 * When it's no need to block rendering until we use it so i added a media query on print.
 ```bash
@@ -91,12 +92,11 @@ function updatePositions() {
 
   var items = document.getElementsByClassName('mover');
   var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-  var scroll = scrollTop / 1250 + (i % 5);
+  var scroll = scrollTop / 1250 ;
   for (var i = 0; i < items.length; i++) {
     // document.body.scrollTop is no longer supported in Chrome.
-    var phase = Math.sin(scroll);
+  var phase = Math.sin((scroll) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  }
   }
 ```
 
@@ -155,7 +155,9 @@ for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 ```
-Calculate the number of pizzas needed to fill the screen, based on browser window resolution. 
+* Calculate the number of pizzas needed to fill the screen, based on browser window resolution.
+* Removed document.querySelector("#movingPizzas1") at the top of _for loop_ assigned with variable.
+
 Original:
 ```bash
 document.addEventListener('DOMContentLoaded', function() {
@@ -175,14 +177,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 ```
-
 After changes:
-
 ```bash
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var rows =  (window.screen.height / s)* cols;
+  var movingPizzas = document.getElementById('movingPizzas1');
   for (var i = 0; i < rows; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -191,8 +192,17 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.getElementById("movingPizzas1").appendChild(elem);
+    movingPizzas.appendChild(elem);
   }
   updatePositions();
 });
+```
+For more increasing performance i have add _translateZ()_ and _backface-visibility_ in the **style.css**.
+Original:
+```bash
+.mover {position: fixed;width: 256px;z-index: -1;}
+```
+After changes:
+```bash
+.mover {position: fixed;width: 256px;z-index: -1;transform: translateZ(0);backface-visibility: hidden;}
 ```
